@@ -1,13 +1,12 @@
 # Taze Update Action
 
-Automatically update dependencies using [taze](https://github.com/antfu/taze) and create a pull request with the changes.
+Automatically update dependencies using [taze](https://github.com/antfu/taze) and create a pull request with the changes. This assumes that the project is using `pnpm`.
 
 ## Features
 
 - Updates dependencies using taze
 - Automatically runs `pnpm install` after updates
 - Creates a pull request with the changes
-- Customizable branch names, PR titles, and labels
 - Skips PR creation if no updates are available
 
 ## Usage
@@ -32,7 +31,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'pnpm'
 
       - name: Update dependencies
@@ -85,10 +84,8 @@ jobs:
 
 ## Requirements
 
-- Your repository must use pnpm as the package manager
-- The workflow must have `actions/checkout@v4` run before this action
-- The workflow must have `pnpm/action-setup` configured
-- The workflow must have `actions/setup-node` configured with pnpm cache
+- your token should be a PAT stored as a secret in order [to have access](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow#:~:text=When%20you%20use%20the%20repository's%20GITHUB_TOKEN%20to%20perform%20tasks%2C%20events%20triggered%20by%20the%20GITHUB_TOKEN%2C%20with%20the%20exception%20of%20workflow_dispatch%20and%20repository_dispatch%2C%20will%20not%20create%20a%20new%20workflow%20run) to run all your CI checks
+- your project must use pnpm (i'd consider PRs to extend this somehow)
 
 ## How it works
 
@@ -101,7 +98,3 @@ jobs:
 7. Creates a pull request with the specified title and labels
 
 If no dependency updates are available, the action exits gracefully without creating a PR.
-
-## License
-
-MIT
