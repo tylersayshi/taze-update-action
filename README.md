@@ -84,8 +84,12 @@ jobs:
 
 ## Requirements
 
-- your token should be a PAT stored as a secret in order [to have access](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow#:~:text=When%20you%20use%20the%20repository's%20GITHUB_TOKEN%20to%20perform%20tasks%2C%20events%20triggered%20by%20the%20GITHUB_TOKEN%2C%20with%20the%20exception%20of%20workflow_dispatch%20and%20repository_dispatch%2C%20will%20not%20create%20a%20new%20workflow%20run) to run all your CI checks
-- your project must use pnpm (i'd consider PRs to extend this somehow)
+- Your project must use pnpm (I'd consider PRs to extend this somehow)
+- A Personal Access Token (PAT) with the following repository permissions:
+  - Read access to metadata
+  - Read and Write access to code, pull requests, and workflows
+
+  The PAT is required instead of `GITHUB_TOKEN` to [trigger workflow runs](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow#:~:text=When%20you%20use%20the%20repository's%20GITHUB_TOKEN%20to%20perform%20tasks%2C%20events%20triggered%20by%20the%20GITHUB_TOKEN%2C%20with%20the%20exception%20of%20workflow_dispatch%20and%20repository_dispatch%2C%20will%20not%20create%20a%20new%20workflow%20run) on the created PR. Store it as a repository secret and use it in place of `secrets.GITHUB_TOKEN`.
 
 ## How it works
 
